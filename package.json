@@ -6,9 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
     "firebase": "^11.4.0",
     "next": "15.2.0",
     "react": "^19.0.0",
@@ -20,9 +22,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "^9.22.0",
     "eslint-config-next": "15.2.0",
+    "eslint-plugin-react": "^7.37.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "prettier": "^3.0.0"
   }
 }
