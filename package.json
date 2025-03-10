@@ -10,11 +10,18 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "embla-carousel-react": "^8.5.2",
     "firebase": "^11.4.0",
+    "lucide-react": "^0.479.0",
     "next": "15.2.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -25,8 +32,8 @@
     "eslint": "^9.22.0",
     "eslint-config-next": "15.2.0",
     "eslint-plugin-react": "^7.37.4",
+    "prettier": "^3.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "prettier": "^3.0.0"
+    "typescript": "^5"
   }
 }
