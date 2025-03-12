@@ -1,0 +1,12 @@
+This package uses [ShadCN](https://ui.shadcn.com/)
+
+ShadCN is an open source UI library for Next / React. Instead of conventional UI libraries, this library does not exist
+in NPM. Which means that you don't update it via npm / package.json.
+
+Instead, whenever you need a latest version of a UI component (say a Button) or a brand new UI component,
+just navigate to that component's page in ShadCN website, and run the command, which pulls the component's code
+into our repository. From there, the component's code is fully ours to own and update as required.
+
+All components pulled by ShadCN are automatically added into the src/components/ui folder by ShadCN.
+
+All custom components that we write should go into the src/components/custom folder.
