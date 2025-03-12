@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface SocialButtonProps {
   icon: React.ReactNode;
@@ -7,7 +7,12 @@ interface SocialButtonProps {
   textColor: string;
 }
 
-const SocialButtons: React.FC<SocialButtonProps> = ({ icon, text, bgColor, textColor }) => {
+const SocialButtons: React.FC<SocialButtonProps> = ({
+  icon,
+  text,
+  bgColor,
+  textColor,
+}) => {
   return (
     <button
       className="flex items-center justify-center w-full py-3 my-2 rounded-md font-semibold"
