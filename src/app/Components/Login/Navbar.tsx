@@ -1,66 +1,91 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+
+import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-const Navbar: React.FC = () => {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const menuItems = [
-    'Home',
-    'Events',
-    'Challenges',
-    'Calender',
-    'About',
-    'Shop',
-    'Media',
+  const navItems = [
+    { 'id': 1, 'text': 'Home' },
+    { 'id': 2, 'text': 'Events' },
+    { 'id': 3, 'text': 'Challenges' },
+    { 'id': 4, 'text': 'Calender' },
+    { 'id': 5, 'text': 'About' },
+    { 'id': 6, 'text': 'Shop' },
+    { 'id': 7, 'text': 'Media' }
   ];
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isOpen]);
+
   return (
-    <nav className="top-0 left-0 w-full bg-black/70 opacity-70 text-white px-4 py-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <img
-          src="https://images.ctfassets.net/ee85281gugj6/4I7CWzaphrkSBiIpP0PuX4/eb4e62945e12de6978656f51ecb580e7/CC_Logo_Green_White.svg"
-          alt="Logo"
-          className="lg:w-24 lg:h-24 h-16 w-16 inline-block ml-12"
-        />
+    <div className="relative min-h-screen">
+      <nav className="w-full bg-transparent md:bg-opacity-0 md:relative z-40">
+        <div className="container mx-auto flex justify-between items-center px-6 py-4">
+          <img
+            src="https://images.ctfassets.net/ee85281gugj6/4I7CWzaphrkSBiIpP0PuX4/eb4e62945e12de6978656f51ecb580e7/CC_Logo_Green_White.svg"
+            alt="Logo"
+            className="lg:w-24 lg:h-24 h-16 w-16 inline-block ml-12"
+          />
+          <ul className="hidden md:flex space-x-6 text-white text-lg">
+            {navItems.map(
+              (item) => (
+                <li key={item.id}>
+                  <a href="#" className="hover:text-gray-200">{item.text}</a>
+                </li>
+              )
+            )}
+          </ul>
+          <button
+            className="md:hidden text-white focus:outline-none"
+            onClick={() => setIsOpen(true)}
+          >
+            {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+          </button>
+        </div>
+      </nav>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6 text-lg">
-          {menuItems.map((item) => {
-            return (
-              <li key={item}>
-                <a href="#" key={item} className="hover:text-green-400">
-                  {item}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+      {isOpen && (
+        <div className="absolute top-0 left-0 w-full bg-black opacity-80 z-50 shadow-lg">
+          <div className="flex justify-between items-center px-6 py-4">
+            <img
+              src="https://images.ctfassets.net/ee85281gugj6/4I7CWzaphrkSBiIpP0PuX4/eb4e62945e12de6978656f51ecb580e7/CC_Logo_Green_White.svg"
+              alt="Logo"
+              className="lg:w-24 lg:h-24 h-16 w-16 inline-block ml-12"
+            />
 
-        {/* Mobile Menu Button */}
-        <button className="md:hidden z-50" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
-      </div>
+            <button
+              className="text-white text-3xl"
+              onClick={() => setIsOpen(false)}
+            >
+              &times;
+            </button>
+          </div>
 
-      {/* Mobile Menu (Slide-in) */}
-      <div
-        className={`fixed top-0 right-0 h-full w-3/4 bg-black/90 text-white transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-      >
-        <ul className="flex flex-col items-center space-y-6 py-10">
-          {menuItems.map((item) => {
-            return (
-              <li key={item}>
-                <a href="#" key={item} className="hover:text-green-400">
-                  {item}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </nav>
+          <ul className="text-white text-lg text-center py-4 space-y-3">
+            {navItems.map(
+              (item) => (
+                <li key={item.id}>
+                  <a
+                    href="#"
+                    className="hover:text-gray-200 block"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+      )}
+
+    </div>
   );
-};
-
-export default Navbar;
+}
