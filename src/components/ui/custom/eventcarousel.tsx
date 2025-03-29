@@ -6,10 +6,10 @@ export function EventCarousel () {
   return (
     <Carousel>
       <CarouselContent>
-        <CarouselItem className="basis-1/3">
+        <CarouselItem className="sm:basis-1/3">
           <EventCard eventTitle={"Tenacity 110"} eventDescription={"Test your limits"}/>
         </CarouselItem>
-        <CarouselItem className="basis-1/3">
+        <CarouselItem className="sm:basis-1/3">
           <EventCard eventTitle={"Summer commute challenge"} eventDescription={"Be the change"}/>
         </CarouselItem>
       </CarouselContent>
