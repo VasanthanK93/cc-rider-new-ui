@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'], // Adjust if needed
-  safelist: [
-    "bg-footergreen",
-    "text-primary",
-  ],
+  safelist: ['bg-footergreen', 'text-primary'],
   theme: {
     extend: {
       colors: {
@@ -21,17 +18,16 @@ export default {
           800: '#285e61',
           900: '#234e52',
         },
-        linegreen: "#B1DFB5",
-        footergreen: "#07570F",
-        headgreen: "#3EB549",
-        nero: "#212020",
-        paragreen: "#379636"
-
+        linegreen: '#B1DFB5',
+        footergreen: '#07570F',
+        headgreen: '#3EB549',
+        nero: '#212020',
+        paragreen: '#379636',
       },
       fontFamily: {
-        'allura': 'Allura',
-        'montserrat': 'Montserrat',
-        'roboto': 'Roboto'
+        allura: 'Allura',
+        montserrat: 'Montserrat',
+        roboto: 'Roboto',
       },
     },
   },

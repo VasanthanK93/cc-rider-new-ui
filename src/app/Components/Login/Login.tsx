@@ -3,11 +3,12 @@ import LoginInfoCard from './LoginInfoCard';
 import LoginCard from './LoginCard';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { EventCarousel } from '../common/eventcarousel';
 
 const App: React.FC = () => {
   return (
     <>
-      <div className="relative h-screen flex items-center justify-center pt-16">
+      <div className="relative h-screen flex items-center justify-center  pt-16">
         {/* Background Image with Tint */}
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
+      <EventCarousel />
       <Footer />
     </>
   );
