@@ -33,8 +33,9 @@ export function EventCarousel() {
           {events.map((event, index) => (
             <CarouselItem key={index} className="sm:basis-1/3">
               <EventCard
-                eventTitle={event.title}
-                eventDescription={event.description}
+                eventTitle={event.name}
+                eventDescription={event.shortDescription}
+                eventImageUrl={event.heroImage.file.url}
               />
             </CarouselItem>
           ))}

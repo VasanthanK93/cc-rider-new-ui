@@ -19,9 +19,9 @@ export function EventCard(props: EventCardProps) {
     props.eventImageUrl ||
     'https://media.istockphoto.com/id/108271803/photo/cycling-event.jpg?s=612x612&w=0&k=20&c=fV0kww8jNMXh3F2wwwDg14_Sp-jvdidfMM7EU_F-lUU=';
   return (
-    <Card className={'py-0 border-0 h-full gap-0'}>
-      <CardHeader className={'px-0 h-3/7 max-w-full'}>
-        <img src={eventImageUrl} className={'max-h-full max-w-full'} />
+    <Card className={'p-auto border-0 h-full gap-0 w-75'}>
+      <CardHeader className={'px-auto h-3/7 max-w-full'}>
+        <img src={eventImageUrl} className={'w-60 h-40'} />
       </CardHeader>
       <CardContent className={'h-3/7 max-w-full pt-5'}>
         <CardTitle>{props.eventTitle}</CardTitle>
