@@ -1,7 +1,13 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import { EventCard } from '@/components/ui/custom/eventcard';
 
-export function EventCarousel () {
+export function EventCarousel() {
   // ToDo Sriram: Get event details in const and create EventCards appropriately
   return (
     <Carousel>
