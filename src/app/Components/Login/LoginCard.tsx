@@ -26,7 +26,6 @@ const LoginCard: React.FC = () => {
   const handleLoginClick = async () => {
     try {
       await loginWithEmailAndPassword(input.email, input.password);
-      alert('Login successful');
     } catch (err) {
       alert(err);
     }
