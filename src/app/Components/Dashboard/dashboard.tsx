@@ -24,12 +24,11 @@ import {
 } from 'recharts';
 import { useUserStore } from '../../store';
 import { EventCarousel } from '../common/eventcarousel';
+import ActivityCard from './activityCard';
+import Challenges from './challengeCard';
 
 export default function Dashboard() {
-  const [year, setYear] = useState('2025');
   const user = useUserStore((state: { user: any }) => state.user);
-  console.log(user);
-
   // Monthly mileage data
   const monthlyData = [
     { name: 'Jan', value: 754 },
@@ -45,9 +44,6 @@ export default function Dashboard() {
     { name: 'Nov', value: 0 },
     { name: 'Dec', value: 0 },
   ];
-
-  // Challenge completion percentage
-  const challengePercentage = 4 * 10; // 4 out of 10 days = 40%
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -73,70 +69,10 @@ export default function Dashboard() {
         {/* Dashboard Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Latest Activity Card */}
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-            <div className="p-6">
-              <h2 className="text-xl font-bold mb-6">Latest activity</h2>
-
-              <div className="mb-6">
-                <p className="text-gray-600">April 14 2024 5:46 am</p>
-                <h3 className="text-xl font-bold mt-2">
-                  Morning ride with the Chennai cyclists team in ORR!
-                </h3>
-                <div className="mt-4 text-xl font-bold">
-                  30.2 <span className="font-normal">Kms | 01 hr 32 mins</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-t px-6 py-4">
-              <Link href="/activities">
-                <span className="text-green-500 hover:text-green-600 flex items-center cursor-pointer">
-                  View all activities <IoMdArrowForward className="ml-2" />
-                </span>
-              </Link>
-            </div>
-          </div>
+          <ActivityCard />
 
           {/* Challenges Card */}
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-            <div className="p-6">
-              <h2 className="text-xl font-bold mb-6">Challenges</h2>
-
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-2xl font-bold">March Madness</h3>
-                  <p className="text-gray-600 mt-1">25kms x 10 days</p>
-
-                  <div className="mt-8">
-                    <p className="text-gray-600">Completed</p>
-                    <p className="text-5xl font-bold mt-1">
-                      4<span className="text-gray-400 text-2xl">/10</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Circular Progress using react-circular-progressbar */}
-                <div className="w-32">
-                  <CircularProgressbar
-                    value={challengePercentage}
-                    strokeWidth={10}
-                    styles={buildStyles({
-                      pathColor: '#4CAF50',
-                      trailColor: '#e9e9e9',
-                    })}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="border-t px-6 py-4">
-              <Link href="/challenges">
-                <span className="text-green-500 hover:text-green-600 flex items-center cursor-pointer">
-                  View more <IoMdArrowForward className="ml-2" />
-                </span>
-              </Link>
-            </div>
-          </div>
+          <Challenges />
         </div>
 
         {/* Mileage Summary */}

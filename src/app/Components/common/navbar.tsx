@@ -2,11 +2,12 @@ import Link from 'next/link';
 import cyclist_icon from '../../assets/cyclist_166346.png';
 import { useState } from 'react';
 import { useUserStore } from '../../store';
+import { signOutUser } from '../../helpers/firebase/auth'; // Adjusted the path to match the correct location
 
 const Navbar = () => {
   const handleLogout = () => {
     // Add your logout logic here
-    console.log('User logged out');
+    signOutUser();
   };
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
