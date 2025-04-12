@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
-    { 'id': 1, 'text': 'Home' },
-    { 'id': 2, 'text': 'Events' },
-    { 'id': 3, 'text': 'Challenges' },
-    { 'id': 4, 'text': 'Calender' },
-    { 'id': 5, 'text': 'About' },
-    { 'id': 6, 'text': 'Shop' },
-    { 'id': 7, 'text': 'Media' }
+    { id: 1, text: 'Home' },
+    { id: 2, text: 'Events' },
+    { id: 3, text: 'Challenges' },
+    { id: 4, text: 'Calender' },
+    { id: 5, text: 'About' },
+    { id: 6, text: 'Shop' },
+    { id: 7, text: 'Media' },
   ];
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add('overflow-hidden');
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove('overflow-hidden');
     }
   }, [isOpen]);
 
@@ -34,13 +34,13 @@ export default function Navbar() {
             className="lg:w-24 lg:h-24 h-16 w-16 inline-block ml-12"
           />
           <ul className="hidden md:flex space-x-6 text-white text-lg">
-            {navItems.map(
-              (item) => (
-                <li key={item.id}>
-                  <a href="#" className="hover:text-gray-200">{item.text}</a>
-                </li>
-              )
-            )}
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a href="#" className="hover:text-gray-200">
+                  {item.text}
+                </a>
+              </li>
+            ))}
           </ul>
           <button
             className="md:hidden text-white focus:outline-none"
@@ -69,23 +69,20 @@ export default function Navbar() {
           </div>
 
           <ul className="text-white text-lg text-center py-4 space-y-3">
-            {navItems.map(
-              (item) => (
-                <li key={item.id}>
-                  <a
-                    href="#"
-                    className="hover:text-gray-200 block"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.text}
-                  </a>
-                </li>
-              )
-            )}
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a
+                  href="#"
+                  className="hover:text-gray-200 block"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.text}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       )}
-
     </div>
   );
 }

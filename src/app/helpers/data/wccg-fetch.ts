@@ -31,13 +31,17 @@ const getHeaders = (token: string | null, data: any = null): HeadersInit => {
   return headers;
 };
 
+const init = (initConfig: { baseUrl: string }): void => {
+  config = initConfig;
+};
+
 const wccgFetch = async (
   url: string,
   token: string | null,
   method: string = 'GET',
   data: any = null,
 ): Promise<Response> => {
-  const { baseUrl } = config;
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || ''; // Get baseUrl from environment variables
   const apiUrl = `${baseUrl}${url}`;
   let apiOptions: RequestInit;
   const headers = getHeaders(token, data);
@@ -105,10 +109,6 @@ const del = async (
 ): Promise<any> => {
   const response = await wccgFetch(url, token, 'DELETE', data);
   return getResponseData(response);
-};
-
-const init = (initConfig: { baseUrl: string }): void => {
-  config = initConfig;
 };
 
 const wfetch = {

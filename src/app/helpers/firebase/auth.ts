@@ -12,8 +12,17 @@ import {
   updatePassword,
   signOut,
 } from 'firebase/auth';
+import { useUserStore } from '../../store';
 
 const auth = getAuth(firebaseapp);
+
+export const initAuthListener = () => {
+  const setUser = useUserStore.getState().setUser;
+
+  auth.onAuthStateChanged((currentUser) => {
+    setUser(currentUser as firebase.default.User | null); // Update Zustand store with the current user
+  });
+};
 
 // Check whether logged in user is a rider with the use of riderId inside claims
 export const ensureRider = async (auth: { getIdTokenResult: () => any }) => {
