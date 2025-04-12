@@ -1,11 +1,11 @@
 import React from 'react';
-import LoginInfoCard from './LoginInfoCard';
-import LoginCard from './LoginCard';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import LoginInfoCard from './loginInfoCard';
+import LoginCard from './loginCard';
+import Navbar from './navbar';
+import Footer from '../common/footer';
 import { EventCarousel } from '../common/eventcarousel';
 
-const App: React.FC = () => {
+const Login: React.FC = () => {
   return (
     <>
       <div className="relative h-screen flex items-center justify-center  pt-16">
@@ -38,4 +38,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Login;
