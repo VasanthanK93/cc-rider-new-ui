@@ -32,7 +32,7 @@ const Login: React.FC = () => {
           </div>
         </div>
       </div>
-      <EventCarousel />
+      <EventCarousel eventType="upcoming" />
       <Footer />
     </>
   );
