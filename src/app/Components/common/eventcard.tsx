@@ -25,9 +25,11 @@ export function EventCard(props: EventCardProps) {
       </CardHeader>
       <CardContent className={'h-3/7 max-w-full pt-5'}>
         <CardTitle>{props.eventTitle}</CardTitle>
-        <CardDescription className={'mt-5'}>
-          {props.eventDescription}
-        </CardDescription>
+        {props.eventDescription && (
+          <CardDescription className={'mt-5'}>
+            {props.eventDescription}
+          </CardDescription>
+        )}
       </CardContent>
       <CardFooter className={'mb-5'}>
         <Button className={'w-full rounded-full'}>Register now</Button>

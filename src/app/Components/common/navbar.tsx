@@ -1,6 +1,6 @@
+'use client';
 import Link from 'next/link';
 import cyclist_icon from '../../assets/cyclist_166346.png';
-import { useState } from 'react';
 import { useUserStore } from '../../store';
 import { signOutUser } from '../../helpers/firebase/auth'; // Adjusted the path to match the correct location
 
@@ -10,7 +10,10 @@ const Navbar = () => {
     signOutUser();
   };
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  let dropdownOpen = false;
+  const toggleDropdown = () => {
+    dropdownOpen = !dropdownOpen;
+  };
   const user = useUserStore((state: { user: any }) => state.user);
 
   return (
@@ -28,7 +31,7 @@ const Navbar = () => {
 
         <nav className="hidden md:flex space-x-10">
           <Link
-            href="/dashboard"
+            href="/"
             className="text-gray-800 border-b-2 border-green-500 font-medium"
           >
             Dashboard
@@ -94,7 +97,7 @@ const Navbar = () => {
             src={cyclist_icon.src}
             alt="Profile"
             className="h-8 w-8 rounded-full bg-green-500 cursor-pointer"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
+            onClick={toggleDropdown}
           />
           {dropdownOpen && (
             <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg">

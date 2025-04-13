@@ -8,7 +8,7 @@ import { IoMdArrowForward } from 'react-icons/io';
 
 const ChallengeCard: React.FC = () => {
   const [activities, setActivities] = useState([]);
-  const [year, setYear] = useState('2025');
+  const [year, setYear] = useState(new Date().getFullYear());
   const user = useUserStore((state: { user: any }) => state.user);
 
   // Challenge completion percentage

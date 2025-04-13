@@ -1,27 +1,7 @@
 // pages/dashboard.js
 'use client';
 import Head from 'next/head';
-import Link from 'next/link';
-import { useState } from 'react';
-import { IoMdArrowForward } from 'react-icons/io';
-import {
-  FaBiking,
-  FaRunning,
-  FaWalking,
-  FaSwimmer,
-  FaCaretDown,
-  FaCircle,
-} from 'react-icons/fa';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip,
-} from 'recharts';
 import { useUserStore } from '../../store';
 import { EventCarousel } from '../common/eventcarousel';
 import ActivityCard from './activityCard';
@@ -64,7 +44,7 @@ export default function Dashboard() {
         {/* Mileage Summary */}
         <MileageSummary />
       </main>
-      <EventCarousel />
+      <EventCarousel eventType="upcoming" />
     </div>
   );
 }
