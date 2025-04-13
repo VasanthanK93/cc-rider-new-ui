@@ -62,15 +62,15 @@ const ChallengeCard: React.FC = () => {
 
     try {
       const idToken = user.accessToken; // Assume this retrieves the logged-in user's ID token
-      const approvalsPromise = await getActivityApprovals(idToken, eventId);
-      const scorecardPromise = await getScorecard(
-        idToken,
-        eventId,
-        selectedOptionId,
-      );
-      const challenge = scorecardPromise.find(
-        (scorecard: any) => scorecard.riderId === user.id,
-      );
+      // const approvalsPromise = await getActivityApprovals(idToken, eventId);
+      // const scorecardPromise = await getScorecard(
+      //   idToken,
+      //   eventId,
+      //   selectedOptionId,
+      // );
+      // const challenge = scorecardPromise.find(
+      //   (scorecard: any) => scorecard.riderId === user.id,
+      // );
 
       // You can now use approvalsPromise, challenge, or other variables as needed
     } catch (e) {

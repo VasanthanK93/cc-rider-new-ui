@@ -26,24 +26,10 @@ import { useUserStore } from '../../store';
 import { EventCarousel } from '../common/eventcarousel';
 import ActivityCard from './activityCard';
 import Challenges from './challengeCard';
+import MileageSummary from './mileageSummary';
 
 export default function Dashboard() {
   const user = useUserStore((state: { user: any }) => state.user);
-  // Monthly mileage data
-  const monthlyData = [
-    { name: 'Jan', value: 754 },
-    { name: 'Feb', value: 876 },
-    { name: 'Mar', value: 737 },
-    { name: 'Apr', value: 0 },
-    { name: 'May', value: 0 },
-    { name: 'Jun', value: 0 },
-    { name: 'Jul', value: 0 },
-    { name: 'Aug', value: 0 },
-    { name: 'Sep', value: 0 },
-    { name: 'Oct', value: 0 },
-    { name: 'Nov', value: 0 },
-    { name: 'Dec', value: 0 },
-  ];
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -76,82 +62,7 @@ export default function Dashboard() {
         </div>
 
         {/* Mileage Summary */}
-        <div className="mt-6 bg-white rounded-lg overflow-hidden shadow-lg">
-          <div className="p-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-              <div className="flex items-center mb-4 md:mb-0">
-                <h2 className="text-xl font-bold">Mileage Summary</h2>
-                <span className="ml-2 text-green-500 flex items-center cursor-pointer">
-                  - 2024 <FaCaretDown className="ml-1" />
-                </span>
-              </div>
-
-              <div className="flex space-x-4">
-                <div className="flex items-center">
-                  <FaCircle className="text-green-500 mr-2 text-xs" />
-                  <span>Ride</span>
-                </div>
-                <div className="flex items-center">
-                  <FaCircle className="text-green-800 mr-2 text-xs" />
-                  <span>Commute</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col md:flex-row">
-              {/* Total Circle using react-circular-progressbar */}
-              <div className="w-40 h-40 mx-auto md:mx-0 md:mr-8 mb-6 md:mb-0">
-                <div className="relative">
-                  <CircularProgressbar
-                    value={70} // Set the percentage filled
-                    strokeWidth={8}
-                    styles={buildStyles({
-                      pathColor: '#4CAF50',
-                      trailColor: '#e9e9e9',
-                    })}
-                  />
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                    <div className="text-gray-500 text-sm">Total</div>
-                    <div className="text-2xl md:text-4xl font-bold text-green-500">
-                      2367
-                    </div>
-                    <div className="text-sm md:text-xl">Kms</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Monthly Stats using Recharts */}
-              <div className="flex-grow h-60">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={monthlyData}
-                    margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-                  >
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} />
-                    <YAxis hide={true} />
-                    <Tooltip />
-                    <Bar dataKey="value" fill="#4CAF50" radius={[2, 2, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            {/* Activity Icons */}
-            <div className="flex justify-end mt-4 space-x-6">
-              <FaBiking className="text-2xl text-green-500" />
-              <FaRunning className="text-2xl text-gray-300" />
-              <FaWalking className="text-2xl text-gray-300" />
-              <FaSwimmer className="text-2xl text-gray-300" />
-            </div>
-          </div>
-          <div className="border-t px-6 py-4">
-            <Link href="/challenges">
-              <span className="text-green-500 hover:text-green-600 flex items-center cursor-pointer">
-                View more <IoMdArrowForward className="ml-2" />
-              </span>
-            </Link>
-          </div>
-        </div>
+        <MileageSummary />
       </main>
       <EventCarousel />
     </div>

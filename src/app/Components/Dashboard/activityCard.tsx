@@ -5,7 +5,7 @@ import { getActivities } from '../../helpers/data/activities';
 import { useUserStore } from '../../store';
 
 const ActivityCard: React.FC = () => {
-  const [activities, setActivities] = useState<{ name: string }>({ name: '' });
+  const [activities, setActivities] = useState<{ name?: string }[]>([]);
 
   const user = useUserStore((state: { user: any }) => state.user);
 
@@ -17,11 +17,15 @@ const ActivityCard: React.FC = () => {
     };
 
     fetchActivities().then((activity) => {
-      setActivities(activity[0]);
-      console.log('Activities:', activities);
+      setActivities(activity);
     });
   }, []);
-  return <Card>{/* <CardHeader title={activities[0].name} /> */}</Card>;
+
+  return (
+    <Card>
+      <CardHeader title={activities[0]?.name || 'No activity available'} />
+    </Card>
+  );
 };
 
 export default ActivityCard;
