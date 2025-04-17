@@ -48,13 +48,6 @@ const LoginCard: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-4">
-          <button
-            type="button"
-            onClick={() => setShowEmailForm(false)}
-            className="flex w-full text-gray-500 hover:underline"
-          >
-            <FaArrowLeft className="mr-2" /> Back
-          </button>
           <input
             type="text"
             placeholder="Email"
@@ -105,6 +98,16 @@ const LoginCard: React.FC = () => {
         </>
       )}
 
+      {showEmailForm &&
+        <p className="text-center mt-3 text-gray-600">
+          <button
+            type="button"
+            onClick={() => setShowEmailForm(false)}
+            className="hover:underline"
+          >
+            Sign in other way
+          </button>
+        </p>}
       <p className="text-center mt-3 text-gray-600">
         Don’t have an account?{' '}
         <a
@@ -112,6 +115,14 @@ const LoginCard: React.FC = () => {
           className="text-green-600 font-bold"
         >
           Sign up
+        </a>
+      </p>
+      <p className="text-center mt-3 text-gray-600">
+        <a
+          href="https://rider.chennaicyclists.com/forgot-password/"
+          className="text-green-600 font-bold"
+        >
+          Forgotten Password?
         </a>
       </p>
     </div>

@@ -1,7 +1,7 @@
 'use client';
-import Login from './components/login/login';
+import Login from './Components/Login/Login';
 import { useUserStore } from './store';
-import Dashboard from './components/dashboard/dashboard';
+import Dashboard from './Components/Dashboard/dashboard';
 import { useEffect } from 'react';
 import { initAuthListener } from './helpers/firebase/auth'; // Import the Firebase auth listener
 import Navbar from './components/common/navbar';

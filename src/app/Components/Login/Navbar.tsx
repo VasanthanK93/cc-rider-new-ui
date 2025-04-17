@@ -25,7 +25,7 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative">
       <nav className="w-full bg-transparent md:bg-opacity-0 md:relative z-40">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
           <img
