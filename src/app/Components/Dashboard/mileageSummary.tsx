@@ -16,7 +16,7 @@ import {
   getRiderMonthlySummary,
   getRiderYearlySummary,
 } from '@/app/helpers/data/activities';
-import YearPicker from '../common/yearpicker';
+import YearPicker from '@/app/components/common/yearPicker';
 import {
   mapRiderMonthlySummary,
   mapRiderSummary,

@@ -5,8 +5,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from './carousel';
-import { EventCard } from '@/app/components/common/eventcard';
+} from '@/app/components/common/carousel';
+import { EventCard } from '@/app/components/common/eventCard';
 import { getEvents, getRegistrations } from '@/app/helpers/data/events';
 import { useUserStore } from '@/app/store';
 

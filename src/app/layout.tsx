@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Navbar from './components/common/navbar';
-import Footer from './components/common/footer';
+import Footer from '@/app/components/common/footer';
+import Navbar from '@/app/components/common/navbar';
+import { useUserStore } from './store';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -13,6 +14,8 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 });
+
+// const user = useUserStore((state: { user: any }) => state.user);
 
 export const metadata: Metadata = {
   title: 'Chennai Cyclists',
@@ -29,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
+       <Navbar />
         {children}
         <Footer />
       </body>
