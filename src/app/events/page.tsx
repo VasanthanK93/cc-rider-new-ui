@@ -1,5 +1,5 @@
 import React from 'react';
-import { EventCarousel } from '@/app/components/common/eventcarousel';
+import { EventCarousel } from '@/app/components/common/eventCarousel';
 
 const EventsPage: React.FC = () => {
   return (
