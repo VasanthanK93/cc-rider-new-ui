@@ -1,11 +1,9 @@
 'use client';
-import Login from './components/login/login';
-import { useUserStore } from './store';
-import Dashboard from './components/dashboard/dashboard';
+import Login from '@/app/components/login/login';
+import { useUserStore } from '@/app/store';
+import Dashboard from '@/app/components/dashboard/dashboard';
 import { useEffect } from 'react';
-import { initAuthListener } from './helpers/firebase/auth'; // Import the Firebase auth listener
-import Navbar from './components/common/navbar';
-import Footer from './components/common/footer';
+import { initAuthListener } from '@/app/helpers/firebase/auth'; // Import the Firebase auth listener
 
 export default function Home() {
   const user = useUserStore((state: { user: any }) => state.user);

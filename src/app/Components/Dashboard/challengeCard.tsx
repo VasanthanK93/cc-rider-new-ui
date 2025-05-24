@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getActivityApprovals, getScorecard } from '@/app/helpers/data/events';
 import { useUserStore } from '@/app/store';
-import { Card } from '../common/card';
+import { Card } from '@/app/components/common/card';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import { Link } from 'lucide-react';
 import { IoMdArrowForward } from 'react-icons/io';

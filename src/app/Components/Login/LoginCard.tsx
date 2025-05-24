@@ -7,7 +7,7 @@ import {
   FaApple,
   FaArrowLeft,
 } from 'react-icons/fa';
-import { loginWithEmailAndPassword } from '../../helpers/firebase/auth';
+import { loginWithEmailAndPassword } from '@/app/helpers/firebase/auth';
 
 const LoginCard: React.FC = () => {
   interface InputState {

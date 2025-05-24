@@ -2,11 +2,11 @@
 'use client';
 import Head from 'next/head';
 import 'react-circular-progressbar/dist/styles.css';
-import { useUserStore } from '../../store';
-import { EventCarousel } from '../common/eventcarousel';
-import ActivityCard from './activityCard';
-import Challenges from './challengeCard';
-import MileageSummary from './mileageSummary';
+import { useUserStore } from '@/app/store';
+import { EventCarousel } from '@/app/components/common/eventCarousel';
+import ActivityCard from '@/app/components/dashboard/activityCard';
+import Challenges from '@/app/components/dashboard/challengeCard';
+import MileageSummary from '@/app/components/dashboard/mileageSummary';
 
 export default function Dashboard() {
   const user = useUserStore((state: { user: any }) => state.user);

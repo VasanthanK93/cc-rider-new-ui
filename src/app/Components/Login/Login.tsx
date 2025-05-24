@@ -1,9 +1,7 @@
 import React from 'react';
-import LoginInfoCard from './loginInfoCard';
-import LoginCard from './loginCard';
-import Navbar from './navbar';
-import Footer from '../common/footer';
-import { EventCarousel } from '../common/eventcarousel';
+import LoginInfoCard from '@/app/components/login/loginInfoCard';
+import LoginCard from '@/app/components/login/loginCard';
+import { EventCarousel } from '@/app/components/common/eventCarousel';
 
 const Login: React.FC = () => {
   return (
@@ -16,7 +14,7 @@ const Login: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black opacity-70"></div>{' '}
           {/* Dark Tint */}
-          <Navbar />
+          {/* <Navbar /> */}
         </div>
 
         {/* Content */}
@@ -33,7 +31,6 @@ const Login: React.FC = () => {
         </div>
       </div>
       <EventCarousel eventType="upcoming" />
-      <Footer />
     </>
   );
 };
