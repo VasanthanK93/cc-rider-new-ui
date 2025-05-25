@@ -23,3 +23,42 @@ export const getTotals = (
   };
   return runTotals;
 };
+
+export const categorizeEvents = (
+  events: any[],
+): { type: string; events: any[] }[] => {
+  const categories: { type: string; events: any[] }[] = [
+    { type: 'endurance', events: [] },
+    { type: 'challenges', events: [] },
+    { type: 'enduroseries', events: [] },
+    { type: 'other', events: [] },
+  ];
+
+  events.forEach((event) => {
+    switch (event.eventCategory) {
+      case 'Enduro Series':
+      case 'EnduroSeries':
+      case 'UltraEnduroSeries':
+        categories[2].events.push(event);
+        break;
+      case 'ITT RACE':
+      case 'TTT Race':
+      case 'Relay race':
+      case 'RoadRace':
+      case 'MTB TRAIL':
+        categories[3].events.push(event);
+        break;
+      case 'ENDURANCE':
+        categories[0].events.push(event);
+        break;
+      case 'Challenge':
+      case 'Duathlon':
+        categories[1].events.push(event);
+        break;
+      default:
+        categories[3].events.push(event);
+    }
+  });
+
+  return categories;
+};

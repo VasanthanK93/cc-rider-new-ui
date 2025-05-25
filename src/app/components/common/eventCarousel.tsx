@@ -8,20 +8,31 @@ import {
 } from '@/app/components/common/carousel';
 import { EventCard } from '@/app/components/common/eventCard';
 import { getEvents, getRegistrations } from '@/app/helpers/data/events';
-import { useUserStore } from '@/app/store';
+import { getAccessTokenFromCookie } from '@/app/store';
+import Link from 'next/link';
 
 import React, { useEffect, useState } from 'react';
 
-export function EventCarousel({ eventType }: { eventType: string }) {
+export function EventCarousel({
+  eventType,
+  showmore,
+}: {
+  eventType: string;
+  showmore?: boolean;
+}) {
   const [events, setEvents] = useState<any[]>([]); // State to store events
-  const user = useUserStore((state: { user: any }) => state.user);
+  const accessToken = getAccessTokenFromCookie();
 
   useEffect(() => {
     async function fetchEvents() {
       if (eventType === 'registrations') {
-        const idTokenn = user.accessToken;
-        const fetchedEvents = await getRegistrations(idTokenn); // Pass eventType to getRegistrations
-        setEvents(fetchedEvents); // Update state with resolved events
+        if (accessToken) {
+          const idTokenn = accessToken;
+          const fetchedEvents = await getRegistrations(idTokenn); // Pass eventType to getRegistrations
+          setEvents(fetchedEvents); // Update state with resolved events
+        } else {
+          console.error('Access token is undefined');
+        }
       } else if (eventType === 'upcoming') {
         const fetchedEvents = await getEvents(); // Pass eventType to getEvents
         setEvents(fetchedEvents); // Update state with resolved events
@@ -59,6 +70,13 @@ export function EventCarousel({ eventType }: { eventType: string }) {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+      <div className="flex justify-center mt-4">
+        {showmore && eventType === 'upcoming' ? (
+          <Link href="/allevents">View all events</Link>
+        ) : showmore && eventType === 'registrations' ? (
+          <Link href="/allevents">View more</Link>
+        ) : null}
+      </div>
     </>
   );
 }

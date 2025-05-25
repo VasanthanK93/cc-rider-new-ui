@@ -98,7 +98,7 @@ const LoginCard: React.FC = () => {
         </>
       )}
 
-      {showEmailForm &&
+      {showEmailForm && (
         <p className="text-center mt-3 text-gray-600">
           <button
             type="button"
@@ -107,7 +107,8 @@ const LoginCard: React.FC = () => {
           >
             Sign in other way
           </button>
-        </p>}
+        </p>
+      )}
       <p className="text-center mt-3 text-gray-600">
         Don’t have an account?{' '}
         <a

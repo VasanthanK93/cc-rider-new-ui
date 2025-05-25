@@ -4,7 +4,7 @@ import { EventCarousel } from '@/app/components/common/eventCarousel';
 const EventsPage: React.FC = () => {
   return (
     <div>
-      <EventCarousel eventType="registrations" />
+      <EventCarousel eventType="registrations" showmore={true} />
       <EventCarousel eventType="upcoming" />
     </div>
   );

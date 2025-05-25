@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fa';
 import { IoMdArrowForward } from 'react-icons/io';
 import { ResponsiveContainer, XAxis, YAxis, Bar, Tooltip } from 'recharts';
-import { useUserStore } from '@/app/store';
+import { getAccessTokenFromCookie } from '@/app/store';
 import {
   getRiderMonthlySummary,
   getRiderYearlySummary,
@@ -35,7 +35,7 @@ const MileageSummary: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   // Monthly mileage data
 
-  const user = useUserStore((state: { user: any }) => state.user);
+  const accessToken = getAccessTokenFromCookie();
   const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
@@ -44,7 +44,10 @@ const MileageSummary: React.FC = () => {
 
   const fetchMileageData = async () => {
     try {
-      const idToken = user.accessToken;
+      const idToken = accessToken;
+      if (!idToken) {
+        throw new Error('Access token is undefined');
+      }
       let monthlyData = await getRiderMonthlySummary(idToken, year.toString());
       let updatedMonthlyData = await mapRiderMonthlySummary(
         monthlyData,
@@ -52,7 +55,6 @@ const MileageSummary: React.FC = () => {
       );
       setMonthlyData(updatedMonthlyData);
       const yearlyData = await getRiderYearlySummary(idToken, year.toString());
-      console.log('yearlyData', yearlyData);
       const updatedYearlyData = await mapRiderSummary(
         yearlyData,
         selectedActivity,

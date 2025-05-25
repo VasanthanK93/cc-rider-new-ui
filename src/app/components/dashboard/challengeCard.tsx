@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { getActivityApprovals, getScorecard } from '@/app/helpers/data/events';
-import { useUserStore } from '@/app/store';
+import { getAccessTokenFromCookie } from '@/app/store';
 import { Card } from '@/app/components/common/card';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
-import { Link } from 'lucide-react';
+import Link from 'next/link';
 import { IoMdArrowForward } from 'react-icons/io';
 
 const ChallengeCard: React.FC = () => {
   const [activities, setActivities] = useState([]);
   const [year, setYear] = useState(new Date().getFullYear());
-  const user = useUserStore((state: { user: any }) => state.user);
+  const accessToken = getAccessTokenFromCookie();
 
   // Challenge completion percentage
   const challengePercentage = 4 * 10; // 4 out of 10 days = 40%
 
   useEffect(() => {
     initializeChallenge();
-  }, [user]);
+  }, [accessToken]);
 
   const initializeChallenge = async () => {
     let now = new Date();
@@ -61,7 +61,7 @@ const ChallengeCard: React.FC = () => {
     }
 
     try {
-      const idToken = user.accessToken; // Assume this retrieves the logged-in user's ID token
+      const idToken = accessToken; // Assume this retrieves the logged-in user's ID token
       // const approvalsPromise = await getActivityApprovals(idToken, eventId);
       // const scorecardPromise = await getScorecard(
       //   idToken,
