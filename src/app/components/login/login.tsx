@@ -17,23 +17,23 @@ const Login: React.FC = () => {
           {/* <Navbar /> */}
         </div>
 
-      <div className="relative z-10">
-
-        <div className="flex flex-col md:flex-row w-full items-center justify-center">
-          <div className="w-full md:w-1/2 flex items-center justify-center px-14">
-            <LoginInfoCard />
+        <div className="relative z-10">
+          <div className="flex flex-col md:flex-row w-full items-center justify-center">
+            <div className="w-full md:w-1/2 flex items-center justify-center px-14">
+              <LoginInfoCard />
+            </div>
+            <div className="w-full md:w-1/2 flex items-center justify-center px-4">
+              <LoginCard />
+            </div>
           </div>
-          <div className="w-full md:w-1/2 flex items-center justify-center px-4">
-            <LoginCard />
+
+          <div className="mt-8 pb-10">
+            {/* <EventCarousel eventType="upcoming" /> */}
           </div>
         </div>
-
-        <div className="mt-8 pb-10">
-          <EventCarousel eventType="upcoming" />
-        </div>
-      </div>
-      <EventCarousel eventType="upcoming" />
-      </div> {/* Closing the wrapping div */}
+        {/* <EventCarousel eventType="upcoming" /> */}
+      </div>{' '}
+      {/* Closing the wrapping div */}
     </>
   );
 };

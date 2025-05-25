@@ -46,3 +46,10 @@ export const getEvents = async (): Promise<any> => {
   const eventlist = await wfetch.get(url);
   return eventlist;
 };
+
+export async function getEventbyId(eventId: String): Promise<any> {
+  console.log('Fetching event by ID:', eventId);
+  const url = `/events-content/events/${eventId}`;
+  const event = await wfetch.get(url);
+  return event;
+}
