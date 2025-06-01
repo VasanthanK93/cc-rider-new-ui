@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'lucide-react';
 import { BarChart, CartesianGrid, Legend } from 'recharts';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { CardFooter } from '@/app/components/common/card';
+
 import {
   FaCircle,
   FaBiking,
@@ -196,13 +197,14 @@ const MileageSummary: React.FC = () => {
           <p className="text-gray-400">No monthly summary data available.</p>
         )}
       </div>
-      <div className="border-t px-6 py-4">
-        <Link href="/challenges">
-          <span className="text-green-500 hover:text-green-600 flex items-center cursor-pointer">
-            View more <IoMdArrowForward className="ml-2" />
-          </span>
-        </Link>
-      </div>
+      <CardFooter className="border-t px-6 pt-4 justify-center mb-4">
+        <a
+          href="/stats"
+          className="text-sm font-bold text-primary hover:underline"
+        >
+          View more stats
+        </a>
+      </CardFooter>
     </div>
   );
 };

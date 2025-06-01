@@ -23,16 +23,13 @@ const YearPicker: React.FC<YearPickerProps> = ({ onYearSelect }) => {
         id="year-picker"
         value={selectedYear ?? ''}
         onChange={handleYearChange}
+        className="text-green-700 border rounded px-2 py-1 appearance-none bg-white bg-no-repeat bg-[right_0.5rem_center] bg-[length:1rem]"
         style={{
-          color: 'darkgreen',
-          appearance: 'none',
           backgroundImage:
             "url(\"data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E\")",
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right 0.5rem center',
-          backgroundSize: '1rem',
         }}
       >
+
         <option value="" disabled>
           -- Select Year --
         </option>

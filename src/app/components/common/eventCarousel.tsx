@@ -20,7 +20,7 @@ export function EventCarousel({
   eventType: string;
   showmore?: boolean;
 }) {
-  const [events, setEvents] = useState<any[]>([]); // State to store events
+  const [events, setEvents] = useState<any[]>([]);
   const accessToken = getAccessTokenFromCookie();
 
   useEffect(() => {
@@ -28,54 +28,64 @@ export function EventCarousel({
       if (eventType === 'registrations') {
         if (accessToken) {
           const idTokenn = accessToken;
-          const fetchedEvents = await getRegistrations(idTokenn); // Pass eventType to getRegistrations
-          setEvents(fetchedEvents); // Update state with resolved events
+          const fetchedEvents = await getRegistrations(idTokenn);
+          setEvents(fetchedEvents);
         } else {
           console.error('Access token is undefined');
         }
       } else if (eventType === 'upcoming') {
-        const fetchedEvents = await getEvents(); // Pass eventType to getEvents
-        setEvents(fetchedEvents); // Update state with resolved events
+        const fetchedEvents = await getEvents();
+        setEvents(fetchedEvents);
       }
     }
     fetchEvents();
-  }, []); // Add eventType as a dependency
+  }, []);
 
   return (
-    <>
-      <div className="flex flex-wrap justify-center py-2">
-        <div className="text-white text-3xl font-bold text-center">
-          Upcoming events and Challenges
-        </div>
+    <><div className='m-5'>
+      <div className="flex flex-wrap justify-center py-6">
+        <h2 className="text-white text-3xl font-bold text-center">
+          Upcoming Events and Challenges
+        </h2>
       </div>
-      <Carousel>
-        <CarouselContent>
-          {events.map((event, index) => (
-            <CarouselItem key={index} className="sm:basis-1/3">
-              {eventType === 'registrations' ? (
-                <EventCard
-                  eventTitle={event.eventName}
-                  eventImageUrl={event.heroImage?.file.url}
-                />
-              ) : (
-                <EventCard
-                  eventTitle={event.name}
-                  eventDescription={event.shortDescription}
-                  eventImageUrl={event.heroImage?.file.url}
-                />
-              )}
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-      <div className="flex justify-center mt-4">
-        {showmore && eventType === 'upcoming' ? (
-          <Link href="/allevents">View all events</Link>
-        ) : showmore && eventType === 'registrations' ? (
-          <Link href="/allevents">View more</Link>
-        ) : null}
+
+      <div className="w-full flex justify-center">
+        <Carousel className="w-full max-w-6xl">
+          <CarouselContent className="flex justify-center items-stretch">
+            {events.map((event, index) => (
+              <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 flex justify-center">
+                {eventType === 'registrations' ? (
+                  <EventCard
+                    eventTitle={event.eventName}
+                    eventImageUrl={event.heroImage?.file.url}
+                  />
+                ) : (
+                  <EventCard
+                    eventTitle={event.name}
+                    eventDescription={event.shortDescription}
+                    eventImageUrl={event.heroImage?.file.url}
+                  />
+                )}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+
+      {showmore && (
+        <div className="flex justify-center mt-6">
+          <Link
+            href={
+              eventType === 'upcoming' ? '/allevents' : '/allevents'
+            }
+            className="text-sm font-bold text-primary hover:underline mb-4"
+          >
+            {eventType === 'upcoming' ? 'View all events' : 'View more'}
+          </Link>
+        </div>
+      )}
       </div>
     </>
   );

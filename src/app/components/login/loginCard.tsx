@@ -26,6 +26,7 @@ const LoginCard: React.FC = () => {
   const handleLoginClick = async () => {
     try {
       await loginWithEmailAndPassword(input.email, input.password);
+      // TODO: SN redirect to dashboard
     } catch (err) {
       alert(err);
     }

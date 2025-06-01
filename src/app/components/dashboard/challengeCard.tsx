@@ -83,7 +83,7 @@ const ChallengeCard: React.FC = () => {
 
   return (
     <div className="challenge-card">
-      {activities.length > 0 ? (
+      {/* {activities.length > 0 ? ( */}
         <Card>
           <div className="bg-white rounded-lg overflow-hidden shadow-lg">
             <div className="p-6">
@@ -125,11 +125,11 @@ const ChallengeCard: React.FC = () => {
             </div>
           </div>
         </Card>
-      ) : (
+      {/* ) : (
         <Card>
           <p>No registered challenge available to display</p>
         </Card>
-      )}
+      )} */}
     </div>
   );
 };
