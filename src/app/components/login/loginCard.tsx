@@ -55,7 +55,7 @@ const LoginCard: React.FC = () => {
             name="email"
             value={input.email}
             onChange={(e) => handleChange(e)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
           />
           <input
             type="password"
@@ -63,7 +63,7 @@ const LoginCard: React.FC = () => {
             name="password"
             value={input.password}
             onChange={(e) => handleChange(e)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
           />
           <button
             className="w-full bg-green-500 text-white py-2 rounded-md font-semibold hover:bg-green-600"

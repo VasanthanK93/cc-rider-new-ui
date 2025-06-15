@@ -38,7 +38,7 @@ export default function Dashboard() {
       </Head>
 
       {/* Main Content */}
-      <main className="container mx-auto py-10 px-4">
+      <main className="container max-w-[85%] mx-auto py-10 px-4">
         {/* Welcome Message */}
         <div className="mb-10">
           <h1 className="text-white text-3xl md:text-4xl font-bold">
