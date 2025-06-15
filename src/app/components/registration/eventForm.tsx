@@ -75,7 +75,7 @@ export default function EventForm({ eventData }: { eventData: EventData }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-[rgb(33,32,32)] text-white p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center sm:text-left">
           {eventData.name} Form
