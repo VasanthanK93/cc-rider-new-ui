@@ -7,22 +7,25 @@ import { signOutUser } from '@/app/helpers/firebase/auth';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import jwt from 'jsonwebtoken';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+  const pathname = usePathname();
   const handleLogout = () => {
     // Add your logout logic here
     signOutUser();
   };
   const [isOpen, setIsOpen] = useState(false);
   const navItems = [
-    { id: 1, text: 'Home' },
-    { id: 2, text: 'Events' },
-    { id: 3, text: 'Challenges' },
-    { id: 4, text: 'Calender' },
-    { id: 5, text: 'About' },
-    { id: 6, text: 'Shop' },
-    { id: 7, text: 'Media' },
+    { id: 1, text: 'Dashboard', href: '/' },
+    { id: 2, text: 'Events', href: '/events' },
+    { id: 3, text: 'Stats', href: '/stats' },
+    { id: 4, text: 'Calender', href: '/calendar' },
+    { id: 5, text: 'About', href: '/about' },
+    { id: 6, text: 'Shop', href: '/shop' },
+    { id: 7, text: 'Media', href: '/media' },
   ];
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [displayName, setDisplayName] = React.useState<string | null>(
     'Cyclist',
@@ -63,48 +66,22 @@ const Navbar = () => {
             </Link>
 
             <nav className="hidden md:flex space-x-10">
-              <Link
-                href="/"
-                className="text-gray-800 border-b-2 border-green-500 font-medium"
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/events"
-                className="text-gray-800 hover:text-green-500 transition"
-              >
-                Events
-              </Link>
-              <Link
-                href="/stats"
-                className="text-gray-800 hover:text-green-500 transition"
-              >
-                Stats
-              </Link>
-              <Link
-                href="/calendar"
-                className="text-gray-800 hover:text-green-500 transition"
-              >
-                Calendar
-              </Link>
-              <Link
-                href="/about"
-                className="text-gray-800 hover:text-green-500 transition"
-              >
-                About
-              </Link>
-              <Link
-                href="/shop"
-                className="text-gray-800 hover:text-green-500 transition"
-              >
-                Shop
-              </Link>
-              <Link
-                href="/media"
-                className="text-gray-800 hover:text-green-500 transition"
-              >
-                Media
-              </Link>
+              {navItems.map((link) => {
+                const isActive = pathname === link.href;
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-gray-800 transition border-b-2 pb-1 ${isActive
+                      ? 'border-green-500 font-medium'
+                      : 'border-transparent hover:text-green-500'
+                      }`}
+                  >
+                    {link.text}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Mobile menu button */}
@@ -201,7 +178,7 @@ const Navbar = () => {
           </div>
         </header>
       ) : (
-        <div className="relative min-h-screen">
+        <div className="relative w-full">
           <nav className="w-full bg-transparent md:bg-opacity-0 md:relative z-40">
             <div className="container mx-auto flex justify-between items-center px-6 py-4">
               <img

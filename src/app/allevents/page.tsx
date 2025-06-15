@@ -10,7 +10,7 @@ import RegisteredEvents from '../components/events/registeredEvents';
 const AllEvents: React.FC = () => {
   return (
     <>
-      <div className="min-h-screen bg-gray-900 ">
+      <div className="min-h-screen bg-gray-900  max-w-[85%] mx-auto">
         <Link
           href="/events"
           className="text-2xl md:text-3xl text-white py-10 px-4 font-bold mb-6 flex"

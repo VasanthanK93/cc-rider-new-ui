@@ -63,9 +63,9 @@ const EventDetails: React.FC<EventsDetailsProps> = ({ eventData }) => {
     ); // Assuming registration closes on 23rd February 2025
   }, [eventData]);
   return (
-    <>
+    <div className='bg-[rgb(33,32,32)]'>
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 max-w-[85%] mx-auto bg-[rgb(33,32,32)]">
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           {/* Event Header */}
           <div className="p-6 md:p-8 border-b border-gray-200">
@@ -142,7 +142,7 @@ const EventDetails: React.FC<EventsDetailsProps> = ({ eventData }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
