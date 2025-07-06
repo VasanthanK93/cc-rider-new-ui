@@ -1,17 +1,24 @@
-'use client';
-
+import { createOrder } from '@/app/helpers/data/orders';
+import { getAccessTokenFromCookie } from '@/app/store';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import OpenCheckout from '@/app/helpers/razorpay/razorpay';
+import { useRouter } from 'next/navigation';
 
 interface EventData {
   name: string;
+  eventId: string;
   registration: {
-    registrationOptions: Array<{ id: string; title: string }>;
+    registrationOptions: Array<{
+      id: string;
+      title: string;
+      paymentPaise?: number;
+    }>;
   };
   // Add other properties of eventData here if needed
 }
-
 export default function EventForm({ eventData }: { eventData: EventData }) {
-  console.log('Event Data:', eventData);
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -23,9 +30,38 @@ export default function EventForm({ eventData }: { eventData: EventData }) {
     emergencyContact: '',
     category: '',
     participationType: 'In-person',
+    amount: 0, // Assuming amount is in paise
+    currency: 'INR',
     agreeToTerms: false,
   });
 
+  const accessToken = getAccessTokenFromCookie();
+  const [orderCreated, setOrderCreated] = useState<any>(null); // Adjust type as needed
+
+  useEffect(() => {
+    if (eventData.registration.registrationOptions.length > 0) {
+      const firstOption = eventData.registration.registrationOptions[0];
+      setFormData((prev) => ({
+        ...prev,
+        category: firstOption.id,
+        amount: firstOption.paymentPaise! / 100, // Assert that paymentPaise is not undefined
+      }));
+    }
+  }, [eventData.registration.registrationOptions]);
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedTitle = e.target.value;
+    const selectedOption = eventData.registration.registrationOptions.find(
+      (option) => option.id === selectedTitle,
+    );
+    if (selectedOption) {
+      setFormData((prev) => ({
+        ...prev,
+        category: selectedOption.id,
+        amount: selectedOption.paymentPaise! / 100, // Assert that paymentPaise is not undefined
+      }));
+    }
+  };
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -51,11 +87,53 @@ export default function EventForm({ eventData }: { eventData: EventData }) {
       participationType: e.target.value,
     }));
   };
+  const postCheckoutCallback = () => {
+    router.push('/allevents');
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Handle form submission logic here
+    const registrationData = {
+      totalAmount: formData.amount * 100, // Convert to paise
+      notes: '',
+      events: [
+        {
+          id: eventData.eventId,
+          register: {
+            option: formData.category,
+            quanity: 1,
+            amount: formData.amount * 100,
+            hasDiscount: false,
+            discount: { code: '', amount: 0 },
+            netAmount: formData.amount * 100,
+            shareContact: false,
+            customData: [],
+          },
+          address: {
+            address: '',
+            city: '',
+            state: '',
+            contactNumber: 0,
+            pincode: 0,
+          },
+        },
+      ],
+      donations: [],
+    };
+    if (!accessToken) {
+      alert('You must be logged in to register.');
+      return;
+    }
+    const orderCreated = await createOrder(accessToken, registrationData);
+    setOrderCreated(orderCreated);
+    // const razorpay = new (window as any).Razorpay(registrationData);
+    // razorpay.open();
+    if (orderCreated.totalAmount > 0) {
+      OpenCheckout(orderCreated, postCheckoutCallback);
+    } else {
+      postCheckoutCallback();
+    }
   };
 
   const handleReset = () => {
@@ -71,11 +149,16 @@ export default function EventForm({ eventData }: { eventData: EventData }) {
       category: '',
       participationType: 'In-person',
       agreeToTerms: false,
+      amount: 0,
+      currency: 'INR',
     });
   };
 
   return (
-    <div className="min-h-screen bg-[rgb(33,32,32)] text-white p-4 sm:p-6 lg:p-8">
+    <div
+      id="registrationForm"
+      className="min-h-screen bg-[rgb(33,32,32)] text-white p-4 sm:p-6 lg:p-8"
+    >
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center sm:text-left">
           {eventData.name} Form
@@ -281,7 +364,7 @@ export default function EventForm({ eventData }: { eventData: EventData }) {
                   id="category"
                   name="category"
                   value={formData.category}
-                  onChange={handleInputChange}
+                  onChange={handleCategoryChange}
                   required
                   className="w-full px-3 py-2 bg-white text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent appearance-none"
                 >

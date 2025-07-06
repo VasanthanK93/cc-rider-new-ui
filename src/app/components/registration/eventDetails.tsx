@@ -1,8 +1,10 @@
-import React, { use, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Calendar, MapPin, Clock } from 'lucide-react';
+import Link from 'next/link';
 
 interface EventsDetailsProps {
   eventData: eventDetails;
+  eventId: string;
 }
 
 interface eventDetails {
@@ -48,14 +50,15 @@ const getDayOfWeek = (isoDate: string): string => {
   const date = new Date(isoDate);
   return date.toLocaleString('default', { weekday: 'long' });
 };
-const EventDetails: React.FC<EventsDetailsProps> = ({ eventData }) => {
+
+const EventDetails: React.FC<EventsDetailsProps> = ({ eventData, eventId }) => {
   const [eventDate, setEventDate] = React.useState<string | null>(null);
   const [eventDay, setEventDay] = React.useState<string | null>(null);
   const [registrationCloseDate, setRegistrationCloseDate] = React.useState<
     string | null
   >(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setEventDate(formatDate(eventData.date));
     setEventDay(getDayOfWeek(eventData.date));
     setRegistrationCloseDate(
@@ -63,7 +66,7 @@ const EventDetails: React.FC<EventsDetailsProps> = ({ eventData }) => {
     ); // Assuming registration closes on 23rd February 2025
   }, [eventData]);
   return (
-    <div className='bg-[rgb(33,32,32)]'>
+    <div className="bg-[rgb(33,32,32)]">
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8 max-w-[85%] mx-auto bg-[rgb(33,32,32)]">
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -95,7 +98,7 @@ const EventDetails: React.FC<EventsDetailsProps> = ({ eventData }) => {
                 disabled={eventData.live}
                 className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 text-lg"
               >
-                REGISTER NOW
+                <Link href="#registrationForm">REGISTER NOW</Link>
               </button>
             </div>
           </div>
@@ -135,8 +138,11 @@ const EventDetails: React.FC<EventsDetailsProps> = ({ eventData }) => {
 
             {/* Event Description */}
             <div className="space-y-6 text-gray-700 leading-relaxed">
-              <p className="text-base font-semibold py-6 my-6 text-gray-800">
-                {eventData.description}
+              <p
+                className="text-base font-base py-6 my-6 text-gray-800"
+                style={{ whiteSpace: 'pre-line' }}
+              >
+                {eventData.description.replace(/_/g, ' ')}
               </p>
             </div>
           </div>

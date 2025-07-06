@@ -1,19 +1,5 @@
 import wfetch from './wccg-fetch';
 
-export const getOrders = async (idToken: string): Promise<any> => {
-  const url = '/events/orders/list';
-  const orders = await wfetch.get(url, idToken);
-  return orders;
-};
-
-export const getRegistrations = async (idToken: string): Promise<any> => {
-  const orders = await getOrders(idToken);
-  const registrations = orders.filter(
-    (o: any) => o.paymentStatus === 'Success',
-  );
-  return registrations;
-};
-
 export const getActivityApprovals = async (
   idToken: string,
   eventId: string,

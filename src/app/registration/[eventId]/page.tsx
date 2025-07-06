@@ -38,7 +38,7 @@ const EventRegistrationPage: React.FC<EventRegistrationPageProps> = ({
       {eventId ? (
         eventData ? (
           <>
-            <EventsDetails eventData={eventData} />
+            <EventsDetails eventData={eventData} eventId={eventId} />
             <EventForm eventData={eventData} />
           </>
         ) : (

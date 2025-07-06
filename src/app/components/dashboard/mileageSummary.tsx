@@ -114,14 +114,14 @@ const MileageSummary: React.FC = () => {
               </a>
             </li>
             <li>
-              <a onClick={() => setSelectedActivity('walk')}>
+              <a onClick={() => setSelectedActivity('Walk')}>
                 <FaWalking
                   className={`text-2xl ${selectedActivity === 'Walk' ? 'text-green-500' : 'text-gray-300'}`}
                 />
               </a>
             </li>
             <li>
-              <a onClick={() => setSelectedActivity('swim')}>
+              <a onClick={() => setSelectedActivity('Swim')}>
                 <FaSwimmer
                   className={`text-2xl ${selectedActivity === 'Swim' ? 'text-green-500' : 'text-gray-300'}`}
                 />

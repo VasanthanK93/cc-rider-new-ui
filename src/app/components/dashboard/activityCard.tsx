@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/app/components/common/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from '@/app/components/common/card';
 import { getActivities } from '@/app/helpers/data/activities';
 import { getAccessTokenFromCookie } from '@/app/store';
 
@@ -24,54 +30,74 @@ const ActivityCard: React.FC = () => {
   }, [accessToken]);
 
   if (!activities.length) {
-    return <Card><CardHeader><CardTitle>No activity available</CardTitle></CardHeader></Card>;
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>No activity available</CardTitle>
+        </CardHeader>
+      </Card>
+    );
   }
 
   const activity = activities[0];
 
   return (
     <>
-      <Card className="gap-2">
-        <h3 className="text-sm font-semibold px-6 text-muted-foreground tracking-wide uppercase">
-          Latest Activity
-        </h3>
+      <div className="bg-white rounded-2xl p-6 shadow-lg flex flex-col h-full">
+        <div className="mb-6 min-h-[80px] flex flex-col justify-start">
+          <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+            Latest Activity
+          </h3>
 
-        <CardContent className="px-6 pt-1 text-sm text-muted-foreground">
-          {new Date(activity.startDateLocal).toLocaleString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true,
-          })}
-        </CardContent>
+          <p className="text-sm text-gray-400">
+            {new Date(activity.startDateLocal).toLocaleString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+            })}
+          </p>
+        </div>
 
-        <CardHeader>
-          <CardTitle className="text-xl font-bold leading-snug">
+        <div className="mb-6 flex-1 flex flex-col justify-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
             {activity.name || 'Unnamed Activity'}
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent className="pb-4 px-6 text-md text-muted-foreground">
-          <p>
-            <span className="font-semibold text-primary">
+          </h2>
+          <div className="flex items-center space-x-4 text-sm">
+            <span className="text-green-600 font-semibold">
               {(activity.distance / 1000).toFixed(2)} km
             </span>
-            {' | '}
-            {Math.floor(activity.movingTime / 3600)} hr{' '}
-            {Math.floor((activity.movingTime % 3600) / 60)} min
-          </p>
-        </CardContent>
-        <CardFooter className="border-t px-6 pt-4 justify-center">
-          <a
-            href="/activities"
-            className="text-sm font-bold text-primary hover:underline"
+            <span className="text-gray-400">|</span>
+            <span className="text-gray-600">
+              {Math.floor(activity.movingTime / 3600)} hr{' '}
+              {Math.floor((activity.movingTime % 3600) / 60)} min
+            </span>
+          </div>
+        </div>
+        <div className="min-h-[24px] flex items-end">
+          <button
+            className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center transition-colors"
+            onClick={() => (window.location.href = '/activities')}
           >
             View all activities
-          </a>
-        </CardFooter>
-      </Card>
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
     </>
   );
 };

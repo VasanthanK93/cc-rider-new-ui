@@ -2,7 +2,7 @@
 import React from 'react';
 import UpcomingEventsCard from './upcomingEventsCard';
 import { getAccessTokenFromCookie } from '@/app/store';
-import { getRegistrations } from '@/app/helpers/data/events';
+import { getRegistrations } from '@/app/helpers/data/orders';
 import { categorizeEvents } from '@/app/helpers/aggregate-helpers';
 
 const RegisteredEvents: React.FC<{}> = () => {

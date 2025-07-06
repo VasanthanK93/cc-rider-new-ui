@@ -50,12 +50,14 @@ export default function Dashboard() {
         </div>
 
         {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Latest Activity Card */}
-          <ActivityCard />
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            {/* Latest Activity Card */}
+            <ActivityCard />
 
-          {/* Challenges Card */}
-          <Challenges />
+            {/* Challenges Card */}
+            <Challenges />
+          </div>
         </div>
 
         {/* Mileage Summary */}

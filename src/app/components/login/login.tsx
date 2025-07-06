@@ -6,7 +6,7 @@ import { EventCarousel } from '@/app/components/common/eventCarousel';
 const Login: React.FC = () => {
   return (
     <>
-        <div className="relative flex items-center justify-center pt-16 min-h-screen">
+      <div className="relative flex items-center justify-center pt-16 min-h-screen">
         {/* Background Image with Tint */}
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -28,7 +28,7 @@ const Login: React.FC = () => {
           </div>
 
           <div className="mt-8 pb-10">
-            <EventCarousel eventType="upcoming" showmore={true}/>
+            <EventCarousel eventType="upcoming" showmore={true} />
           </div>
         </div>
         {/* <EventCarousel eventType="upcoming" /> */}

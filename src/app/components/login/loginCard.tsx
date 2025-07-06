@@ -8,6 +8,7 @@ import {
   FaArrowLeft,
 } from 'react-icons/fa';
 import { loginWithEmailAndPassword } from '@/app/helpers/firebase/auth';
+import { useRouter } from 'next/navigation';
 
 const LoginCard: React.FC = () => {
   interface InputState {
@@ -15,6 +16,7 @@ const LoginCard: React.FC = () => {
     password: string;
   }
 
+  const router = useRouter();
   const [showEmailForm, setShowEmailForm] = useState(false);
   const [input, setInput] = useState<InputState>({ email: '', password: '' });
   // const [input, setInput] = useState({});
@@ -25,7 +27,15 @@ const LoginCard: React.FC = () => {
 
   const handleLoginClick = async () => {
     try {
-      await loginWithEmailAndPassword(input.email, input.password);
+      const success = await loginWithEmailAndPassword(
+        input.email,
+        input.password,
+      );
+      if (success) {
+        router.push('/dashboard'); // Redirect to dashboard after successful login
+      } else {
+        alert('Login failed. Please check your credentials.');
+      }
       // TODO: SN redirect to dashboard
     } catch (err) {
       alert(err);
