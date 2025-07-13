@@ -23,11 +23,13 @@ async function createInvoice(response) {
 export default function OpenCheckout(orderCreated, postCheckoutCallback) {
   console.log('OrderCreated received params...', orderCreated);
   const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY || process.env.NEXT_RAZORPAY_KEY;
+  const razorpaySecret = process.env.NEXT_PUBLIC_RAZORPAY_SECRET || process.env.NEXT_RAZORPAY_SECRET;
   if (!razorpayKey) {
     throw new Error('Razorpay key is missing. Please set NEXT_PUBLIC_RAZORPAY_KEY in your environment variables.');
   }
   let options = {
     key: razorpayKey, // Enter the Key ID generated from the Dashboard
+    secret: razorpaySecret, // Enter the Secret generated from the Dashboard
     amount: orderCreated.totalAmount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
     currency: 'INR',
     name: 'WCCG - Chennai Cyclists',
