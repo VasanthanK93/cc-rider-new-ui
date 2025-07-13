@@ -11,59 +11,40 @@ import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const pathname = usePathname();
+  const handleLogout = async () => {
+    await signOutUser();
+    setDropdownOpen(false);
+    // Remove accessToken from cookie
+    document.cookie = 'accessToken=; Max-Age=0; path=/;';
 
-  // Add hydration state to prevent server/client mismatch
-  const [isHydrated, setIsHydrated] = useState(false);
+    window.location.href = '/'; // or '/' if you want to redirect to home
+  };
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [displayName, setDisplayName] = useState<string | null>('Cyclist');
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [user, setUser] = useState<any>(null);
   const navItems = [
     { id: 1, text: 'Dashboard', href: '/dashboard' },
     { id: 2, text: 'Events', href: '/events' },
-    { id: 3, text: 'Stats', href: '/stats' },
+    { id: 3, text: 'Stats', href: '/activities' },
     { id: 4, text: 'Calender', href: '/calendar' },
     { id: 5, text: 'About', href: '/about' },
     { id: 6, text: 'Shop', href: '/shop' },
     { id: 7, text: 'Media', href: '/media' },
   ];
 
-  const handleLogout = () => {
-    // Add your logout logic here
-    signOutUser()
-      .then(() => {
-        window.location.href = '/';
-      })
-      .catch((error) => {
-        console.error('Sign out failed:', error);
-      });
-  };
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [displayName, setDisplayName] = React.useState<string | null>(
+    'Cyclist',
+  );
+  const accessToken = getAccessTokenFromCookie();
+  const user = accessToken ? jwt.decode(accessToken) : null;
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
   useEffect(() => {
-    setIsHydrated(true);
-
-    // Only run on client side after hydration
-    const token = getAccessTokenFromCookie();
-    setAccessToken(token ?? null);
-
-    if (token) {
-      const decodedUser = jwt.decode(token);
-      setUser(decodedUser);
-
-      if (
-        decodedUser &&
-        typeof decodedUser !== 'string' &&
-        'name' in decodedUser
-      ) {
-        setDisplayName(decodedUser.name);
-      }
+    if (user && typeof user !== 'string' && 'name' in user) {
+      setDisplayName(user.name);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (isOpen) {
@@ -72,59 +53,6 @@ const Navbar = () => {
       document.body.classList.remove('overflow-hidden');
     }
   }, [isOpen]);
-
-  // Show loading state or basic navbar until hydrated
-  if (!isHydrated) {
-    return (
-      <header className="bg-white py-3 px-6 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <img
-              src="https://images.ctfassets.net/ee85281gugj6/Pppr6SCCpFwpJ82J4fj0U/46e84d6cb03105a36705f480732c0ac8/CC_Logo_Short_Black.svg"
-              alt="Chennai Cyclists"
-              className="h-10"
-            />
-          </div>
-
-          <nav className="hidden md:flex space-x-10">
-            {navItems.map((link) => (
-              <span
-                key={link.href}
-                className="text-gray-800 transition border-b-2 pb-1 border-transparent"
-              >
-                {link.text}
-              </span>
-            ))}
-          </nav>
-
-          <button className="md:hidden text-gray-800">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-
-          <div className="relative flex items-center">
-            <img
-              src={cyclist_icon.src}
-              alt="Profile"
-              className="h-8 w-8 rounded-full bg-green-500"
-            />
-          </div>
-        </div>
-      </header>
-    );
-  }
 
   return (
     <>
@@ -149,11 +77,10 @@ const Navbar = () => {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`text-gray-800 transition border-b-2 pb-1 ${
-                      isActive
-                        ? 'border-green-500 font-medium'
-                        : 'border-transparent hover:text-green-500'
-                    }`}
+                    className={`text-gray-800 transition border-b-2 pb-1 ${isActive
+                      ? 'border-green-500 font-medium'
+                      : 'border-transparent hover:text-green-500'
+                      }`}
                   >
                     {link.text}
                   </Link>
@@ -194,7 +121,7 @@ const Navbar = () => {
                   <ul className="py-1">
                     <li>
                       <Link
-                        href="/my-account"
+                        href="/myaccount"
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                       >
                         My Account
@@ -202,7 +129,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <Link
-                        href="/my-id-card"
+                        href="/myidcard"
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                       >
                         My ID Card
@@ -216,22 +143,22 @@ const Navbar = () => {
                         Strava Account
                       </Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link
                         href="/orders"
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                       >
                         Orders
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <Link
                         href="/settings"
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                       >
                         Settings
                       </Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link
                         href="/reset-password"
@@ -241,7 +168,7 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <button
+                        <button
                         onClick={handleLogout}
                         className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
                       >

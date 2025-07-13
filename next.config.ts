@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
     NEXT_RAZORPAY_KEY: process.env.WCCG_RAZORPAY_KEY,
     NEXT_EVENTS_API_BASE_URL: process.env.WCCG_EVENTS_API_BASE_URL,
     NEXT_ORDERS_API_BASE_URL: process.env.WCCG_ORDERS_API_BASE_URL,
+    NEXT_RIDERS_API_BASE_URL: process.env.WCCG_RIDERS_API_BASE_URL,
+    NEXT_RIDER_SIGNUP_API_URL: '/riderCreate',
+    updateRidersPasswordApiUrl: '/{riderId}/update/password',
+    eventsApiUrl: '/events',
+    discountsApiUrl: '/offers',
+    ordersApiUrl: '/orders',
   },
 };
 

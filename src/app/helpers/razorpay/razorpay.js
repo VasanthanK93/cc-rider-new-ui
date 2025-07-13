@@ -22,7 +22,10 @@ async function createInvoice(response) {
 
 export default function OpenCheckout(orderCreated, postCheckoutCallback) {
   console.log('OrderCreated received params...', orderCreated);
-  const razorpayKey = process.env.razorpayKey;
+  const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY || process.env.NEXT_RAZORPAY_KEY;
+  if (!razorpayKey) {
+    throw new Error('Razorpay key is missing. Please set NEXT_PUBLIC_RAZORPAY_KEY in your environment variables.');
+  }
   let options = {
     key: razorpayKey, // Enter the Key ID generated from the Dashboard
     amount: orderCreated.totalAmount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
@@ -58,6 +61,18 @@ export default function OpenCheckout(orderCreated, postCheckoutCallback) {
     },
   };
 
-  let rzp = new Razorpay(options);
-  rzp.open();
+  // Ensure Razorpay is available globally
+  if (typeof window !== 'undefined' && typeof window.Razorpay === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => {
+      let rzp = new window.Razorpay(options);
+      rzp.open();
+    };
+    document.body.appendChild(script);
+  } else {
+    let rzp = new window.Razorpay(options);
+    rzp.open();
+  }
 }

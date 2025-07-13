@@ -46,9 +46,10 @@ export function EventCarousel({
     <>
       <div className="m-5">
         <div className="flex flex-wrap justify-center py-6">
+          {eventType === 'registrations' ? (
           <h2 className="text-white text-3xl font-bold text-center">
             Upcoming Events and Challenges
-          </h2>
+          </h2>) : null}
         </div>
 
         <div className="w-full flex justify-center">
@@ -63,12 +64,16 @@ export function EventCarousel({
                     <EventCard
                       eventTitle={event.eventName}
                       eventImageUrl={event.heroImage?.file.url}
+                      eventId={event.eventId}
+                      eventType={eventType}
                     />
                   ) : (
                     <EventCard
                       eventTitle={event.name}
                       eventDescription={event.shortDescription}
                       eventImageUrl={event.heroImage?.file.url}
+                      eventId={event.eventId}
+                      eventType={eventType}
                     />
                   )}
                 </CarouselItem>
@@ -82,7 +87,7 @@ export function EventCarousel({
         {showmore && (
           <div className="flex justify-center mt-6">
             <Link
-              href={eventType === 'upcoming' ? '/allevents' : '/allevents'}
+              href={'/allevents'}
               className="text-sm font-bold text-primary hover:underline mb-4"
             >
               {eventType === 'upcoming' ? 'View all events' : 'View more'}

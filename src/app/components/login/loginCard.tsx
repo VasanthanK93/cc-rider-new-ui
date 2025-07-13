@@ -10,7 +10,12 @@ import {
 import { loginWithEmailAndPassword } from '@/app/helpers/firebase/auth';
 import { useRouter } from 'next/navigation';
 
-const LoginCard: React.FC = () => {
+interface LoginCardProps {
+  onSignupClick: () => void;
+  onResetPasswordClick: () => void;
+}
+
+const LoginCard: React.FC<LoginCardProps> = (props) => {
   interface InputState {
     email: string;
     password: string;
@@ -27,11 +32,16 @@ const LoginCard: React.FC = () => {
 
   const handleLoginClick = async () => {
     try {
-      const success = await loginWithEmailAndPassword(
+      // Expect loginWithEmailAndPassword to return { success, accessToken }
+      const result = await loginWithEmailAndPassword(
         input.email,
         input.password,
       );
-      if (success) {
+
+      // Type guard to check for accessToken property
+      if (result && typeof result === 'object' && 'accessToken' in result && (result as any).accessToken) {
+        // Set access token in cookie
+        document.cookie = `accessToken=${(result as any).accessToken}; path=/; secure; samesite=strict`;
         router.push('/dashboard'); // Redirect to dashboard after successful login
       } else {
         alert('Login failed. Please check your credentials.');
@@ -121,21 +131,23 @@ const LoginCard: React.FC = () => {
         </p>
       )}
       <p className="text-center mt-3 text-gray-600">
-        Don’t have an account?{' '}
-        <a
+        <a onClick={props.onSignupClick} className="text-green-600 font-bold cursor-pointer">
+        Don’t have an account?{' '}</a>
+        {/* <a
           href="https://chennaicyclists.com/signup"
           className="text-green-600 font-bold"
         >
           Sign up
-        </a>
+        </a> */}
       </p>
       <p className="text-center mt-3 text-gray-600">
-        <a
+        {/* <a
           href="https://rider.chennaicyclists.com/forgot-password/"
           className="text-green-600 font-bold"
-        >
+        > */}
+        <a onClick={props.onResetPasswordClick} className="text-green-600 font-bold cursor-pointer">
           Forgotten Password?
-        </a>
+          </a>
       </p>
     </div>
   );

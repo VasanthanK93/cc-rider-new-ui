@@ -11,8 +11,7 @@ export const getActivityApprovals = async (
 
 export const getScorecard = async (
   idToken: string,
-  eventId: string,
-  selectedOption: any,
+  eventId: string
 ): Promise<any> => {
   const url = `/events-tracking/scorecards/${eventId}`;
   const scorecard = await wfetch.get(url, idToken);

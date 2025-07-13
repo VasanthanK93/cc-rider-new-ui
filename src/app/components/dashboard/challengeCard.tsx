@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getActivityApprovals, getScorecard } from '@/app/helpers/data/events';
 import { getAccessTokenFromCookie } from '@/app/store';
 import jwt from 'jsonwebtoken';
+import Router from 'next/router';
 
 const ChallengeCard: React.FC = () => {
   const [user_id, setUserId] = useState<string>('CC000000');
@@ -65,8 +66,7 @@ const ChallengeCard: React.FC = () => {
       // fetch challenge data
       const scorecardPromise = await getScorecard(
         accessToken,
-        eventId,
-        selectedOptionId,
+        eventId
       );
       const foundChallenge = scorecardPromise.find(
         (scorecard: any) => scorecard.riderId === user_id,
@@ -207,7 +207,7 @@ const ChallengeCard: React.FC = () => {
             </div>
           </div>
           <div className="min-h-[24px] flex items-end">
-            <button className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center transition-colors">
+            <button onClick={()=> Router.push('/activities/:challenge.eventId')} className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center transition-colors">
               View more
               <svg
                 className="w-4 h-4 ml-1"

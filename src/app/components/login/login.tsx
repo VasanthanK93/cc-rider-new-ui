@@ -1,9 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import LoginInfoCard from '@/app/components/login/loginInfoCard';
 import LoginCard from '@/app/components/login/loginCard';
 import { EventCarousel } from '@/app/components/common/eventCarousel';
+import SignupModal from './signUpModel';
+import ResetPasswordModal from './resetPasswordModel';
 
 const Login: React.FC = () => {
+
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [isResetPasswordModelOpen, setIsResetPasswordModelOpen] = useState(false);
+
+  const openSignupModal = () => {
+    setIsSignupModalOpen(true);
+  };
+
+  const closeSignupModal = () => {
+    setIsSignupModalOpen(false);
+  };
+
+  const openResetPasswordModal = () => {
+    setIsResetPasswordModelOpen(true);
+  };
+
+  const closeResetPasswordModal = () => {
+    setIsResetPasswordModelOpen(false);
+  };
+
   return (
     <>
       <div className="relative flex items-center justify-center pt-16 min-h-screen">
@@ -23,7 +45,7 @@ const Login: React.FC = () => {
               <LoginInfoCard />
             </div>
             <div className="w-full md:w-1/2 flex items-center justify-center px-4">
-              <LoginCard />
+              <LoginCard onSignupClick={openSignupModal} onResetPasswordClick={openResetPasswordModal}/>
             </div>
           </div>
 
@@ -32,7 +54,14 @@ const Login: React.FC = () => {
           </div>
         </div>
         {/* <EventCarousel eventType="upcoming" /> */}
-      </div>{' '}
+      </div>
+      <SignupModal 
+        isOpen={isSignupModalOpen} 
+        onClose={closeSignupModal} 
+      />
+      <ResetPasswordModal 
+        isOpen={isResetPasswordModelOpen} // This should be controlled by state if you want to open it
+        onClose={closeResetPasswordModal} />
       {/* Closing the wrapping div */}
     </>
   );

@@ -13,7 +13,6 @@ const ActivityCard: React.FC = () => {
   const [activities, setActivities] = useState<any[]>([]);
 
   const accessToken = getAccessTokenFromCookie();
-
   useEffect(() => {
     const fetchActivities = async () => {
       if (!accessToken) {
